@@ -105,7 +105,7 @@ public:
     ALWAYS_INLINE value_type operator++() { // pre-increment
         value_type tmp = _raw;
         value_type val = ((tmp >> first_bit) + 1) & MASK;
-        _raw = (tmp & ~(MASK << first_bit)) | (val << first_bit);
+        _raw = _assign(tmp, val);
         return val;
     }
 
