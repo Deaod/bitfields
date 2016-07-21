@@ -243,7 +243,7 @@ private:
     }
 
     ALWAYS_INLINE static value_type _mod(value_type lhs, value_type rhs) {
-        return (lhs & ~(MASK << first_bit)) | ((((lhs >> first_bit) & MASK) % rhs) << first_bit);
+        return (lhs & ~(MASK << first_bit)) | (lhs % ((rhs & MASK) << first_bit));
     }
 
     ALWAYS_INLINE static value_type _and(value_type lhs, value_type rhs) {
