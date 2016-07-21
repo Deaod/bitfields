@@ -39,6 +39,10 @@ private:
     static const value_type MASK = (static_cast<value_type>(1) << NUM_BITS) - 1;
 
 public:
+    ALWAYS_INLINE explicit operator bool() const {
+        return (_raw & (MASK << first_bit)) != 0;
+    }
+
     ALWAYS_INLINE operator value_type() const {
         return (_raw >> first_bit) & MASK;
     }
@@ -127,6 +131,10 @@ public:
     // Now overload all those operators on volatile. Without the non-volatile
     // versions working compilers cannot delete calls to these operators, even
     // if the instance is not volatile.
+
+    ALWAYS_INLINE explicit operator bool() const volatile {
+        return (_raw & (MASK << first_bit)) != 0;
+    }
 
     ALWAYS_INLINE operator value_type() const volatile {
         return (_raw >> first_bit) & MASK;
